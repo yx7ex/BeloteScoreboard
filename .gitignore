@@ -1,0 +1,28 @@
+# IDE files
+.idea/
+.DS_Store
+*.suo
+*.user
+*.sln
+*.userosscache
+*.sln.docstates
+
+# Build files
+build/
+.gradle/
+captures/
+output/
+local.properties
+
+# Keystore files
+*.jks
+*.keystore
+
+# Distribution files
+*.apk
+*.aab
+*.ap_
+
+# Misc
+.cxx/
+*.iml

@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="horizontal"
+    android:paddingTop="8dp"
+    android:paddingBottom="8dp">
+
+    <TextView
+        android:id="@+id/textview_item_round_number"
+        android:layout_width="48dp"
+        android:layout_height="wrap_content"
+        android:gravity="center" 
+        android:paddingStart="4dp" 
+        android:paddingEnd="4dp"
+        android:text="0." />
+
+    <TextView
+        android:id="@+id/textview_item_team1_score"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_weight="1"
+        android:gravity="center"
+        android:text="0" />
+
+    <TextView
+        android:id="@+id/textview_item_team2_score"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_weight="1"
+        android:gravity="center"
+        android:text="0" />
+
+    <TextView
+        android:id="@+id/textview_item_bid"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_weight="1"
+        android:gravity="center"
+        android:text="0" />
+</LinearLayout>
