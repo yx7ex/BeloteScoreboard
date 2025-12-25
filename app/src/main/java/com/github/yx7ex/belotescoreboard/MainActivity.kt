@@ -1,5 +1,6 @@
 package com.github.yx7ex.belotescoreboard
 
+import android.content.Context
 import android.graphics.Color
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
@@ -15,6 +16,8 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import androidx.recyclerview.widget.DividerItemDecoration
 import androidx.core.content.ContextCompat
+import org.json.JSONArray
+import org.json.JSONObject
 
 class MainActivity : AppCompatActivity() {
 
@@ -216,6 +219,7 @@ class MainActivity : AppCompatActivity() {
                 updateDisplay()
                 clearInputFields()
                 checkWinCondition()
+                saveGameState()
 
             } catch (e: NumberFormatException) {
                 Toast.makeText(this, "Invalid data format", Toast.LENGTH_SHORT).show()
@@ -230,6 +234,8 @@ class MainActivity : AppCompatActivity() {
                 .setNegativeButton("No", null)
                 .show()
         }
+
+        loadGameState()
         updateDisplay()
         clearInputFields()
     }
@@ -253,6 +259,7 @@ class MainActivity : AppCompatActivity() {
             isEditMode = false
             addRoundScoreButton.text = "Add Round Score"
         }
+        saveGameState()
     }
 
     private fun checkWinCondition() {
@@ -416,5 +423,61 @@ class MainActivity : AppCompatActivity() {
         roundBidEditText.requestFocus()
         activeEditText = roundBidEditText
         updateCustomKeyboardState()
+    }
+
+    private fun saveGameState() {
+        val sharedPreferences = getSharedPreferences("BeloteScoreboardPrefs", Context.MODE_PRIVATE)
+        val editor = sharedPreferences.edit()
+
+        editor.putInt("totalTeam1Score", totalTeam1Score)
+        editor.putInt("totalTeam2Score", totalTeam2Score)
+        editor.putInt("currentRoundNumber", currentRoundNumber)
+        editor.putBoolean("isGameFinished", isGameFinished)
+
+        val roundScoresJson = JSONArray()
+        for (roundScore in roundScoresList) {
+            val roundJson = JSONObject()
+            roundJson.put("roundNumber", roundScore.roundNumber)
+            roundJson.put("team1Score", roundScore.team1Score)
+            roundJson.put("team2Score", roundScore.team2Score)
+            roundJson.put("bid", roundScore.bid)
+            roundScoresJson.put(roundJson)
+        }
+        editor.putString("roundScoresList", roundScoresJson.toString())
+
+        editor.apply()
+    }
+
+    private fun loadGameState() {
+        val sharedPreferences = getSharedPreferences("BeloteScoreboardPrefs", Context.MODE_PRIVATE)
+
+        totalTeam1Score = sharedPreferences.getInt("totalTeam1Score", 0)
+        totalTeam2Score = sharedPreferences.getInt("totalTeam2Score", 0)
+        currentRoundNumber = sharedPreferences.getInt("currentRoundNumber", 1)
+        isGameFinished = sharedPreferences.getBoolean("isGameFinished", false)
+
+        val roundScoresJsonString = sharedPreferences.getString("roundScoresList", null)
+        if (roundScoresJsonString != null) {
+            try {
+                val roundScoresJson = JSONArray(roundScoresJsonString)
+                roundScoresList.clear()
+                for (i in 0 until roundScoresJson.length()) {
+                    val roundJson = roundScoresJson.getJSONObject(i)
+                    val roundScore = RoundScore(
+                        roundNumber = roundJson.getInt("roundNumber"),
+                        team1Score = roundJson.getString("team1Score"),
+                        team2Score = roundJson.getString("team2Score"),
+                        bid = roundJson.getString("bid")
+                    )
+                    roundScoresList.add(roundScore)
+                }
+                scoreHistoryAdapter.notifyDataSetChanged()
+                if (roundScoresList.isNotEmpty()) {
+                    buttonEditLastRound.isEnabled = true
+                }
+            } catch (e: Exception) {
+                e.printStackTrace()
+            }
+        }
     }
 }
