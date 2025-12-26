@@ -24,7 +24,6 @@ Builds:
   - versionName: "1.0"
     versionCode: 1
     commit: "v1.0"
-    subdir: "app"
+    subdir: app
     gradle:
-      - "assembleRelease"
-    output: "build/outputs/apk/release/app-release-unsigned.apk"
+      - release

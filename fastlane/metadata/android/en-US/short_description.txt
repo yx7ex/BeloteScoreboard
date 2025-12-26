@@ -1,0 +1,1 @@
+Simple scoreboard for tracking Belote card game scores

@@ -1,0 +1,8 @@
+Initial release:
+• Score tracking for two teams
+• Custom keyboard for quick entry
+• Round history with edit capability
+• TK score support
+• Win detection at 301 points
+• Game state persistence
+• Dark mode support

@@ -1,0 +1,15 @@
+A simple and intuitive scoreboard for the card game Belote. Keep track of scores for two teams, view round history, and enjoy a custom keyboard designed for quick score entry.
+
+Features:
+• Easy score entry for each round
+• Handles "TK" scores for failed contracts
+• Automatically calculates total scores
+• Displays a history of all rounds
+• Allows editing the last entered round
+• Win detection at 301 points with a "New Game" dialog
+• Custom keyboard optimized for Belote scoring
+• Dark mode support
+• Screen stays on during gameplay
+• Automatic game state restoration
+
+Perfect for keeping score during your Belote games without pen and paper!
