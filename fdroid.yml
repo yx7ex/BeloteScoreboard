@@ -1,29 +1,33 @@
 Categories:
   - Games
-License: "GPL-3.0-or-later"
-SourceCode: "https://github.com/yx7ex/BeloteScoreboard"
-IssueTracker: "https://github.com/yx7ex/BeloteScoreboard/issues"
-Changelog: "https://github.com/yx7ex/BeloteScoreboard/releases"
+License: GPL-3.0-or-later
+SourceCode: https://github.com/yx7ex/BeloteScoreboard
+IssueTracker: https://github.com/yx7ex/BeloteScoreboard/issues
+Changelog: https://github.com/yx7ex/BeloteScoreboard/releases
 
 AutoName: Belote Scoreboard
 Description: |
-    A simple and intuitive scoreboard for the card game Belote. Keep track of scores for two teams, view round history, and enjoy a custom keyboard designed for quick score entry.
+  A simple and intuitive scoreboard for the card game Belote. Keep track of scores for two teams, view round history, and enjoy a custom keyboard designed for quick score entry.
 
-    Features:
-    *   Easy score entry for each round.
-    *   Handles "TK" scores.
-    *   Automatically calculates total scores.
-    *   Displays a history of all rounds.
-    *   Allows editing the last entered round.
-    *   Win detection with a "New Game" dialog.
+  Features:
+  *   Easy score entry for each round.
+  *   Handles "TK" scores.
+  *   Automatically calculates total scores.
+  *   Displays a history of all rounds.
+  *   Allows editing the last entered round.
+  *   Win detection with a "New Game" dialog.
 
 RepoType: git
-Repo: "https://github.com/yx7ex/BeloteScoreboard.git"
+Repo: https://github.com/yx7ex/BeloteScoreboard.git
 
 Builds:
-  - versionName: "1.0"
+  - versionName: '1.0'
     versionCode: 1
-    commit: "v1.0"
+    commit: v1.0
     subdir: app
     gradle:
       - release
+
+AutoUpdateMode: Version
+UpdateCheckMode: Tags
+UpdateCheckData: app/build.gradle.kts|versionCode\s=\s(\d+)|.|versionName\s=\s"([\d.]+)"
